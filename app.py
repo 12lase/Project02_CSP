@@ -49,7 +49,7 @@ def studentscheduler(data_dir="data", output_dir="data", student_id=None):
         student_id (str, optional): The student ID to use in filename. Defaults to student ID in report.md.
 
     Returns:
-        str: Path to the generated '<studentid>_timetable.csv' file.
+        str: Path to the generated 'togun9_timetable.csv' file.
     """
     if student_id is None:
         student_id = get_student_id()
