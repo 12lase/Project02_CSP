@@ -22,13 +22,20 @@
 
 ## Section 2: Local Verification & Implemented Solvers
 
-*Check the algorithms and features you successfully ran and verified by placing an `x` in the brackets (e.g., `[x]`):* - \[x\] DataLoader & CSV Parsing - \[x\] Hard Constraint Validation Engine - \[x\] Soft Penalty & Quality Evaluation Engine - \[x\] CSP Backtracking with MRV + LCV + Forward Checking - \[x\] Min-Conflicts CSP Local Search - \[x\] Timetable CSV Export (<studentid>\_timetable.csv)
+*Check the algorithms and features you successfully ran and verified by placing an `x` in the brackets (e.g., `[x]`):*
+
+- [x] DataLoader & CSV Parsing
+- [x] Hard Constraint Validation Engine
+- [x] Soft Penalty & Quality Evaluation Engine
+- [x] CSP Backtracking with MRV + LCV + Forward Checking
+- [x] Min-Conflicts CSP Local Search
+- [x] Timetable CSV Export (<studentid>_timetable.csv)
 
 ------------------------------------------------------------------------
 
 ## Section 3: Video Presentation & Project Structure
 
-- **Video Presentation Link:** [CS411 Project 2](https://1drv.ms/f/c/1c11c2f2d34565f5/IgA8bdjDQwVVSbscSdcMDLnaARS_GDNhNMDA170B-Ad_k2M?e=JWCFO9)
+- **Video Presentation Link:** https://1drv.ms/f/c/1c11c2f2d34565f5/IgA8bdjDQwVVSbscSdcMDLnaARS_GDNhNMDA170B-Ad_k2M?e=JWCFO9
 - **Project Directory Structure:** `app.py` contains the `studentscheduler()` entry point and exports the timetable CSV. The `data/` folder contains the input CSV datasets, constraint configuration, and generated timetable. The `scheduler/` package contains `data_loader.py` for reading the datasets, `model.py` for constraints and penalty evaluation, `csp_solver.py` for backtracking and heuristics, `local_search.py` for Min-Conflicts optimization, and `pipeline.py` for connecting these stages. The `tests/` folder contains scheduler validation tests. `requirements.txt` lists Python dependencies, and `report.md` contains the project report.
 
 ``` text
