@@ -13,8 +13,6 @@ def solve(data_dir="data", max_nodes=200000, ls_steps=4000, ls_seconds=10.0, ver
     log = print if verbose else (lambda *a, **k: None)
     data = load_data(data_dir)
     csp = Timetable(data)
-    for w in csp.warnings:
-        log("warning:", w)
 
     empty = [c for c in csp.variables if not csp.domains[c]]
     if empty:
