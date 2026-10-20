@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>project_guidelines</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Project_Guidelines_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Project_Guidelines_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="Project_Guidelines_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="Project_Guidelines_files/libs/quarto-html/popper.min.js"></script>
+<script src="Project_Guidelines_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Project_Guidelines_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Project_Guidelines_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Project_Guidelines_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Project_Guidelines_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Project_Guidelines_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Project_Guidelines_files/libs/bootstrap/bootstrap-917079515d91bccb85b543faf8aa8bb6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="ai-policy-use-declaration" class="level2">
+<h2 class="anchored" data-anchor-id="ai-policy-use-declaration">AI Policy: Use &amp; Declaration</h2>
+<ul>
+<li><strong>Limited AI Use:</strong> AI coding assistants (e.g., GitHub Copilot) may be used for syntax suggestions, debugging, coding support, and learning assistance.</li>
+<li><strong>Prohibited — Project Materials:</strong> Do not paste project prompts, guidelines, problem statements, or substantial portions of project materials into AI systems for code generation, completion, or debugging.</li>
+<li><strong>Prohibited — Written Work:</strong> You <strong>must not</strong> use AI tools to write, rewrite, generate, or substantially edit any report, written analysis, mathematical reasoning, or explanation submitted for this project. All submitted written work must be <strong>your own writing and reasoning</strong>.</li>
+<li><strong>Responsibility:</strong> Submitted work must reflect your own understanding, implementation, and problem-solving effort.</li>
+</ul>
+<section id="ai-use-declaration" class="level3">
+<h3 class="anchored" data-anchor-id="ai-use-declaration">AI Use Declaration</h3>
+<ol type="1">
+<li>Complete the <a href="https://www.petraai.org/student">PETRA AI Student Declaration</a> based on your actual AI use for this project.</li>
+<li>Generate and save the declaration image as <strong><code>AI_declaration.png</code></strong>.</li>
+<li>Include <strong><code>AI_declaration.png</code></strong> in your project repository.</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Required:</strong> Your declaration must accurately reflect how you used AI tools for this project.</p>
+</blockquote>
+</section>
+<section id="code-resources" class="level3">
+<h3 class="anchored" data-anchor-id="code-resources">Code Resources</h3>
+<p>You can refer to or consult code from the following resources: 1. Student Starter Code: <a href="https://github.com/CS411-MTD/Project02_Test_Student">Project02_Test_Student</a> 2. Reference Code from <a href="https://github.com/aimacode/aima-python">AI: A Modern Approach (AIMA Python)</a> (CSP &amp; Search modules)</p>
+<hr>
+</section>
+</section>
+<section id="project-overview-university-class-scheduling-timetable-optimizer" class="level2">
+<h2 class="anchored" data-anchor-id="project-overview-university-class-scheduling-timetable-optimizer">Project Overview: University Class Scheduling &amp; Timetable Optimizer</h2>
+<p>University course timetabling is a classic, NP-hard <strong>Constraint Satisfaction Problem (CSP)</strong> and combinatorial optimization problem faced by academic institutions worldwide, including UIC.</p>
+<p>In this assignment, you will model and implement an automated intelligent class scheduling system that assigns university Computer Science courses to available classrooms/lecture halls and time slots while satisfying essential <strong>Hard Constraints</strong> (zero double-bookings, room capacity limits, instructor availability, cohort clash prevention) and optimizing <strong>Soft Constraints</strong> (instructor preferences, minimizing student dead hours/gaps, campus building transit).</p>
+<section id="learning-objectives" class="level3">
+<h3 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h3>
+<ol type="1">
+<li><strong>CSP Formulation:</strong> Formulate a complex real-world scheduling problem into Variables (<span class="math inline">\(X\)</span>), Domains (<span class="math inline">\(D\)</span>), and Constraints (<span class="math inline">\(C\)</span>).</li>
+<li><strong>Heuristic CSP Search:</strong> Implement CSP Backtracking enhanced with Minimum Remaining Values (MRV), Degree Heuristic, Least Constraining Value (LCV), and Forward Checking / Arc Consistency.</li>
+<li><strong>Local Search:</strong> Implement Min-Conflicts local search for soft constraint optimization.</li>
+<li><strong>Data Modeling &amp; Validation:</strong> Parse relational CSV datasets (<code>courses.csv</code>, <code>instructors.csv</code>, <code>rooms.csv</code>, <code>time_slots.csv</code>, <code>student_cohorts.csv</code>, <code>constraints.csv</code>) and build a constraint verification engine.</li>
+<li><strong>Timetable Generation &amp; Output:</strong> Generate a finalized timetable and export the schedule dynamically to <code>&lt;studentid&gt;_timetable.csv</code>.</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="your-job" class="level2">
+<h2 class="anchored" data-anchor-id="your-job">Your Job</h2>
+<ol type="1">
+<li>Use the provided relational datasets in the <code>data/</code> folder (<code>courses.csv</code>, <code>instructors.csv</code>, <code>rooms.csv</code>, <code>time_slots.csv</code>, <code>student_cohorts.csv</code>, <code>constraints.csv</code>).</li>
+<li>Design and implement your constraint checking, CSP backtracking, and local search algorithms.</li>
+<li>Provide the main entry point in <strong><code>app.py</code></strong> via the function <strong><code>studentscheduler(data_dir="data", output_dir="data", student_id=None)</code></strong>.</li>
+<li>When <code>studentscheduler()</code> is executed, it must dynamically process the datasets from <code>data_dir</code>, solve the scheduling problem, and generate the schedule file named <strong><code>&lt;studentid&gt;_timetable.csv</code></strong> in the specified <code>output_dir</code> (default: <code>data/</code>).</li>
+<li>Ensure that your scheduler is dynamic: if datasets in <code>data/</code> are updated or changed, your scheduler should still successfully load the new data and generate a valid schedule.</li>
+<li><strong>Project Structure Flexibility:</strong> You are free to design and structure your own internal helper modules, classes, and folder structure however you like. In testing, evaluation focuses on executing <code>studentscheduler()</code> from <code>app.py</code> and verifying that the timetable CSV is created.</li>
+<li>Explain how your project directory and architecture are built in your <strong><code>report.md</code></strong> and your <strong>video presentation</strong>.</li>
+</ol>
+<hr>
+<section id="project-directory" class="level3">
+<h3 class="anchored" data-anchor-id="project-directory">Project Directory</h3>
+<p>You must use the exact file names and folder structure shown below. Do not rename, move, or remove the required files or folders, as the project structure will be used for automated testing and evaluation.</p>
+<pre class="text"><code>├── app.py                      # REQUIRED: Contains studentscheduler() entry point
+├── data/                       # Provided relational datasets &amp; output folder
+│   ├── courses.csv             # Course catalog and enrollment requirements
+│   ├── instructors.csv         # Instructor profiles and availability
+│   ├── rooms.csv               # Rooms, buildings, capacities, and room types
+│   ├── time_slots.csv          # Weekly timetable time slots
+│   ├── student_cohorts.csv     # Student cohorts and curriculum requirements
+│   ├── constraints.csv         # Constraint definitions and guidelines
+│   └── &lt;studentid&gt;_timetable.csv # Output schedule generated by studentscheduler()
+├── report.md                   # REQUIRED: Complete the provided report template
+├── AI_declaration.png          # REQUIRED: AI use declaration generated using PETRA
+├── requirements.txt            # Python dependencies
+└── [Your Custom Modules]       # Helper modules, solvers, or packages of your choice</code></pre>
+<hr>
+</section>
+<section id="task-1-dataset-problem-understanding-data.csv" class="level3">
+<h3 class="anchored" data-anchor-id="task-1-dataset-problem-understanding-data.csv">📋 Task 1: Dataset &amp; Problem Understanding (<code>data/*.csv</code>)</h3>
+<p>The relational datasets are provided for you in <code>data/</code>: - <strong>Courses (<code>courses.csv</code>):</strong> Course IDs, course levels, instructor assignments, and room requirements. - <strong>Instructors (<code>instructors.csv</code>):</strong> Instructor IDs, names, assigned courses, and teaching preferences. - <strong>Rooms (<code>rooms.csv</code>):</strong> Room IDs, buildings, physical/scheduling capacities, and room types (Lecture Hall, Computer Lab, Classroom, etc.). - <strong>Time Slots (<code>time_slots.csv</code>):</strong> Weekly time slots across days (Monday to Friday) and periods. - <strong>Student Cohorts (<code>student_cohorts.csv</code>):</strong> Cohorts, student counts, and mandatory courses. - <strong>Constraints (<code>constraints.csv</code>):</strong> Formal definitions of hard and soft scheduling rules.</p>
+<hr>
+</section>
+<section id="task-2-constraint-engine-problem-formulation" class="level3">
+<h3 class="anchored" data-anchor-id="task-2-constraint-engine-problem-formulation">📋 Task 2: Constraint Engine &amp; Problem Formulation</h3>
+<p>Formulate the scheduling problem into variables, domains, and constraints: - <strong>Hard Constraints (Feasibility - 0 Clashes Allowed):</strong> 1. <em>H1: No Room Double-Booking:</em> No two courses scheduled in the same room at the same time slot. 2. <em>H2: Room Capacity &amp; Type Compatibility:</em> Assigned room capacity <span class="math inline">\(\ge\)</span> course enrollment, and room type matches requirements (e.g.&nbsp;lab courses in Computer Labs). 3. <em>H3: No Instructor Double-Booking:</em> An instructor cannot teach two courses simultaneously. 4. <em>H4: Instructor Availability:</em> No assignments in an instructor’s declared unavailable slots. 5. <em>H5: No Student Cohort Clash:</em> Mandatory courses for the same student cohort cannot overlap in time. 6. <em>H6: Complete Assignment:</em> Every required course in the curriculum must be scheduled. - <strong>Soft Constraints (Quality &amp; Penalties):</strong> 1. <em>S1: Instructor Preferences:</em> Penalize assignments outside preferred slots. 2. <em>S2: Room Utilization Fit:</em> Penalize heavily oversized rooms. 3. <em>S3: Student Dead Hours:</em> Penalize gaps/dead hours in a cohort’s daily schedule. 4. <em>S4: Consecutive Session Fatigue:</em> Penalize <span class="math inline">\(&gt;2\)</span> back-to-back classes for cohorts. 5. <em>S5: Campus Transit:</em> Penalize consecutive classes in different buildings without transit time.</p>
+<hr>
+</section>
+<section id="task-3-implement-csp-local-search-algorithms" class="level3">
+<h3 class="anchored" data-anchor-id="task-3-implement-csp-local-search-algorithms">📋 Task 3: Implement CSP &amp; Local Search Algorithms</h3>
+<p>Implement your scheduling solvers: 1. <strong>CSP Backtracking:</strong> - Minimum Remaining Values (MRV) heuristic for variable selection. - Degree Heuristic as tie-breaker. - Least Constraining Value (LCV) heuristic for value ordering. - Forward Checking / Arc Consistency (AC-3) for domain pruning. 2. <strong>Local Search:</strong> - Min-Conflicts CSP local search for soft penalty minimization.</p>
+<hr>
+</section>
+<section id="task-4-main-entry-point-timetable-export-app.py" class="level3">
+<h3 class="anchored" data-anchor-id="task-4-main-entry-point-timetable-export-app.py">📋 Task 4: Main Entry Point &amp; Timetable Export (<code>app.py</code>)</h3>
+<p>Implement the <code>studentscheduler()</code> function in <code>app.py</code>: - Accepts parameters: <code>data_dir="data"</code>, <code>output_dir="data"</code>, <code>student_id=None</code>. - Loads the datasets dynamically from <code>data_dir</code>. - Executes your CSP / optimization solver to produce a complete schedule. - Saves the timetable to <code>&lt;studentid&gt;_timetable.csv</code> in <code>output_dir</code>. - Returns the path to the generated CSV file.</p>
+<p>Recommended CSV format columns:</p>
+<pre class="csv"><code>course_id,room_id,slot_id,instructor_id,cohort_id,day,start_time,end_time</code></pre>
+<hr>
+</section>
+<section id="task-5-complete-the-report-report.md" class="level3">
+<h3 class="anchored" data-anchor-id="task-5-complete-the-report-report.md">📋 Task 5: Complete the Report (<code>report.md</code>)</h3>
+<p>Complete all required sections in <a href="report.md">report.md</a>: - <strong>Student Information:</strong> Full Name, UID (netID), and UIN. - <strong>Dataset Configuration:</strong> Counts of courses, rooms, and time slots. - <strong>Local Verification Checklist:</strong> Mark verified solvers and features with <code>[x]</code>. - <strong>Project Structure &amp; Video Presentation:</strong> Provide your video link and explain your directory structure. - <strong>Discussion &amp; Analysis:</strong> Detailed answers covering CSP formulation, comparison of Backtracking vs Local Search, and LLM/AI integration.</p>
+<blockquote class="blockquote">
+<p>[!WARNING] Do not modify the section headers, bold titles, or overall formatting of <a href="report.md">report.md</a>. Changes to the structure may cause the autograder tests to fail. Replace all bracketed placeholder text with your answers. Do not leave any placeholders in the final report.</p>
+</blockquote>
+<hr>
+</section>
+<section id="task-6-record-a-video-presentation" class="level3">
+<h3 class="anchored" data-anchor-id="task-6-record-a-video-presentation">📋 Task 6: Record a Video Presentation</h3>
+<p>Record a <strong>5–7 minute video presentation</strong> explaining your project implementation: - <strong>Project Directory Structure:</strong> Explain how your codebase, modules, and files are structured and how they interact. - <strong>Problem Formulation:</strong> How did you formulate variables, domains, and hard/soft constraints? - <strong>CSP Backtracking Heuristics:</strong> How do MRV, LCV, and Forward Checking improve search efficiency? - <strong>Local Search &amp; Soft Optimization:</strong> How does Min-Conflicts optimize schedule quality and resolve constraint conflicts? - <strong>Demonstration:</strong> Show <code>studentscheduler()</code> executing and generating the timetable CSV file <code>&lt;studentid&gt;_timetable.csv</code>.</p>
+<section id="video-requirements" class="level4">
+<h4 class="anchored" data-anchor-id="video-requirements">Video Requirements</h4>
+<ul>
+<li>You may use tools such as Zoom, Loom, or OBS Studio to record your presentation.</li>
+<li>Your face must be visible during the presentation. If you are not comfortable with this requirement, please discuss it with the instructor in advance.</li>
+<li>The recorded video must be in <code>.mp4</code> format and must not exceed <strong>7 minutes</strong>.</li>
+<li>Upload the video to a sharing platform such as YouTube, Google Drive, or Dropbox.</li>
+<li>Ensure the video link is publicly accessible to the instructor.</li>
+<li>Add the video link to Section 3 of <code>report.md</code>.</li>
+</ul>
+<hr>
+</section>
+</section>
+</section>
+<section id="marking-scheme-100-marks" class="level2">
+<h2 class="anchored" data-anchor-id="marking-scheme-100-marks">Marking Scheme (100 marks)</h2>
+<section id="project-implementation-40-marks" class="level3">
+<h3 class="anchored" data-anchor-id="project-implementation-40-marks">1. Project Implementation (40 marks)</h3>
+<ul>
+<li><strong>Required Files &amp; Datasets Check (10 marks):</strong> <code>app.py</code>, <code>report.md</code>, <code>AI_declaration.png</code>, and datasets in <code>data/</code> present.</li>
+<li><strong>Scheduler &amp; Timetable Generation (30 marks):</strong> <code>studentscheduler()</code> in <code>app.py</code> runs successfully on the dataset, dynamically generates <code>&lt;studentid&gt;_timetable.csv</code> in <code>data/</code>, and outputs a valid non-empty timetable schedule.</li>
+</ul>
+</section>
+<section id="completion-of-report.md-30-marks" class="level3">
+<h3 class="anchored" data-anchor-id="completion-of-report.md-30-marks">2. Completion of report.md (30 marks)</h3>
+<ul>
+<li><strong>Student Information (5 marks):</strong> Full Name, UID (netID), and UIN filled in.</li>
+<li><strong>Dataset Configuration (5 marks):</strong> Course, room, and time slot counts documented.</li>
+<li><strong>Verification Checklist (5 marks):</strong> Checklist showing verified solvers and CSV export.</li>
+<li><strong>Presentation &amp; Project Structure (5 marks):</strong> Provide valid video presentation link and project directory structure overview.</li>
+<li><strong>Discussion &amp; Problem Formulation (10 marks):</strong> Comprehensive analysis answering the 3 discussion questions.</li>
+</ul>
+</section>
+<section id="schedule-correctness-quality-video-presentation-30-marks" class="level3">
+<h3 class="anchored" data-anchor-id="schedule-correctness-quality-video-presentation-30-marks">3. Schedule Correctness, Quality &amp; Video Presentation (30 marks)</h3>
+<p><strong>Note</strong>: This section is manually graded. - <strong>Constraint Satisfaction &amp; Correctness (15 marks):</strong> The generated schedule strictly adheres to all hard constraints (0 room conflicts, 0 instructor conflicts, 0 cohort clashes, room capacities respected). - <strong>Soft Constraint Optimization &amp; Quality (5 marks):</strong> Effective minimization of soft penalties (instructor preferences, cohort gaps, transit time). - <strong>Video Presentation (10 marks):</strong> The 5–7 minute presentation clearly demonstrates the scheduler, explains the CSP formulation, heuristics, and local search optimization.</p>
+<hr>
+</section>
+</section>
+<section id="submission-instructions" class="level2">
+<h2 class="anchored" data-anchor-id="submission-instructions">Submission Instructions</h2>
+<section id="pre-submission-check" class="level3">
+<h3 class="anchored" data-anchor-id="pre-submission-check">1. Pre-Submission Check</h3>
+<p>Before submitting, make sure all required files are included and follow the required directory structure.</p>
+<p><strong>Note</strong>: The Gradescope autograder awards up to 70 points. The remaining 30 points are manually graded.</p>
+</section>
+<section id="submission-to-gradescope" class="level3">
+<h3 class="anchored" data-anchor-id="submission-to-gradescope">2. Submission to Gradescope</h3>
+<ul>
+<li>Submit all required files to Gradescope.</li>
+<li>Do not rename or move required files/folders/structure.</li>
+<li>Review your autograder results and score after submission.</li>
+<li>You may revise and resubmit before the deadline.</li>
+</ul>
+<p><strong>Note</strong>: Only the official Gradescope results are used for grading.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

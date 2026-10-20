@@ -15,7 +15,6 @@ env/
 ENV/
 
 # Project & Autograder Ignores
-tests/
 CSP_autograder/
 autograder/
 .github/
